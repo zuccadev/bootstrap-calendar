@@ -150,6 +150,9 @@ if (!String.prototype.formatNum) {
         onAfterModalHidden: function (events) {
             // Inside this function 'this' is the calendar instance
         },
+        onAfterSliderOpening: function (events) {
+            
+        },
         // -------------------------------------------------------------
         // INTERNAL USE ONLY. DO NOT ASSIGN IT WILL BE OVERRIDDEN ANYWAY
         // -------------------------------------------------------------
@@ -1063,7 +1066,7 @@ if (!String.prototype.formatNum) {
     Calendar.prototype._update = function () {
         var self = this;
 
-        $('*[data-toggle="tooltip"]').tooltip({container: this.options.tooltip_container});
+        /*$('*[data-toggle="tooltip"]').tooltip({container: this.options.tooltip_container});
 
         $('*[data-cal-date]').click(function () {
             var view = $(this).data('cal-view');
@@ -1074,7 +1077,7 @@ if (!String.prototype.formatNum) {
             var view = $('[data-cal-date]', this).data('cal-view');
             self.options.day = $('[data-cal-date]', this).data('cal-date');
             self.view(view);
-        });
+        });*/
 
         this['_update_' + this.options.view]();
 
@@ -1278,6 +1281,7 @@ if (!String.prototype.formatNum) {
 
                 slider.slideDown('fast', function () {
                     slider.addClass(cls);
+                    self.options.onAfterSliderOpening.call(self, self.options.events);
                 });
             };
 
