@@ -459,7 +459,9 @@ if (!String.prototype.formatNum) {
 
         data.events = this.getEventsBetween(start, end);
         data.months = this._getMonths();
-        data.month = this.options.position.start.getMonthFormatted();
+        data.month = '' + this.options.position.start.getMonthFormatted();
+
+        //console.log(data.months, data.month);
 
         switch (this.options.view) {
             case 'month':
@@ -1262,6 +1264,8 @@ if (!String.prototype.formatNum) {
         var tick_position = cell.data('cal-row');
         var baseCls = 'open-on';
         var cls = baseCls + tick_position;
+
+        cell.toggleClass('open').closest('.cal-month-box').find('.cal-cell').not(cell).removeClass('open');
 
         if (slider.hasClass(cls)) {
             slider.slideUp('fast').removeClass(cls);
